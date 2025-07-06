@@ -27,11 +27,14 @@ import {
   Calendar,
   Target,
   FileText,
-  Award
+  Award,
+  CheckCircle
 } from 'lucide-react';
 import heroImage from '@/assets/hero-investi.jpg';
 import aiMatchingImage from '@/assets/ai-matching.jpg';
 import dashboardImage from '@/assets/dashboard-preview.jpg';
+import ContactForm from '@/components/ContactForm';
+import VideoModal from '@/components/VideoModal';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -44,6 +47,8 @@ const Index = () => {
     investors: 0,
     countries: 0
   });
+  const [activeNav, setActiveNav] = useState<string>('features');
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Animation des statistiques
   useEffect(() => {
@@ -53,7 +58,7 @@ const Index = () => {
     
     const targets = {
       projects: 1300,
-      funding: 72,
+      funding: 180,
       investors: 350,
       countries: 17
     };
@@ -77,6 +82,24 @@ const Index = () => {
     }, increment);
 
     return () => clearInterval(timer);
+  }, []);
+
+  // Scroll animation for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['features', 'demo', 'pricing', 'contact'];
+      let found = 'features';
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 80) found = id;
+        }
+      }
+      setActiveNav(found);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const texts = {
@@ -160,10 +183,9 @@ const Index = () => {
         title: 'Vision Future d\'Investi',
         subtitle: 'L\'avenir de l\'investissement décentralisé',
         roadmap: [
-          { date: 'Q2 2025', title: 'Tokenisation des parts', desc: 'Transformation des actions en tokens blockchain' },
-          { date: 'Q3 2025', title: 'DAO d\'investisseurs', desc: 'Gouvernance décentralisée pour les décisions d\'investissement' },
-          { date: 'Q4 2025', title: 'IA Coach Vidéo', desc: 'Analyse comportementale des pitchs en temps réel' },
-          { date: 'Q1 2026', title: 'Signature Web3', desc: 'Contrats intelligents pour les accords d\'investissement' }
+          { date: 'Q1 2026', title: 'Signature Web3', desc: 'Contrats intelligents pour les accords d\'investissement' },
+          { date: 'Q2 2026', title: 'Lancement international', desc: 'Expansion sur de nouveaux marchés européens' },
+          { date: 'Q3 2026', title: 'Nouveaux produits IA', desc: 'Lancement de solutions IA avancées pour l\'investissement' }
         ]
       },
       stats: {
@@ -171,17 +193,69 @@ const Index = () => {
         subtitle: 'Une croissance qui parle d\'elle-même',
         items: [
           { value: '+1300', label: 'Projets publiés', suffix: '' },
-          { value: '+72M€', label: 'Montant levé', suffix: '' },
+          { value: '+180M', label: 'Montant levé (TND)', suffix: '' },
           { value: '350+', label: 'Investisseurs actifs', suffix: '' },
           { value: '17', label: 'Pays représentés', suffix: '' }
+        ]
+      },
+      pricing: {
+        title: 'Tarifs transparents',
+        subtitle: 'Choisissez le plan qui correspond à vos besoins',
+        plans: [
+          {
+            name: 'Starter',
+            price: '0',
+            period: 'TND/mois',
+            description: 'Parfait pour commencer',
+            features: [
+              'Profil entrepreneur basique',
+              'Jusqu\'à 3 projets',
+              'Matching IA limité',
+              'Support communauté'
+            ],
+            cta: 'Commencer gratuitement',
+            popular: false
+          },
+          {
+            name: 'Professional',
+            price: '89',
+            period: 'TND/mois',
+            description: 'Pour les entrepreneurs sérieux',
+            features: [
+              'Profil entrepreneur complet',
+              'Projets illimités',
+              'Matching IA avancé',
+              'Coach IA personnel',
+              'Analytics détaillés',
+              'Support prioritaire'
+            ],
+            cta: 'Essayer 14 jours gratuit',
+            popular: true
+          },
+          {
+            name: 'Enterprise',
+            price: '249',
+            period: 'TND/mois',
+            description: 'Pour les grandes entreprises',
+            features: [
+              'Tout du plan Professional',
+              'Équipe collaborative',
+              'API personnalisée',
+              'Support dédié',
+              'Formation personnalisée',
+              'Intégrations avancées'
+            ],
+            cta: 'Nous contacter',
+            popular: false
+          }
         ]
       },
       testimonials: {
         title: 'Ils nous font confiance',
         items: [
-          { name: 'Sarah Chen', role: 'CEO, TechFlow', content: 'Grâce à Investi, j\'ai levé 2M€ en 3 mois. Le matching IA est bluffant !', rating: 5 },
-          { name: 'Marc Dubois', role: 'Partner, Innovation Capital', content: 'Enfin une plateforme qui filtre les projets de qualité. Un gain de temps énorme.', rating: 5 },
-          { name: 'Lisa Rodriguez', role: 'Fondatrice, GreenTech', content: 'L\'interface est intuitive et le coach IA m\'a aidé à perfectionner mon pitch.', rating: 5 }
+          { name: 'Amira Ben Salah', role: 'CEO, TechFlow Tunisie', content: 'Grâce à Investi, j\'ai levé 500,000 TND en 3 mois. Le matching IA est bluffant !', rating: 5 },
+          { name: 'Mehdi Gharbi', role: 'Partner, Innovation Capital Tunis', content: 'Enfin une plateforme qui filtre les projets de qualité. Un gain de temps énorme.', rating: 5 },
+          { name: 'Sarra Karoui', role: 'Fondatrice, GreenTech Tunisia', content: 'L\'interface est intuitive et le coach IA m\'a aidé à perfectionner mon pitch.', rating: 5 }
         ]
       },
       cta: {
@@ -271,10 +345,9 @@ const Index = () => {
         title: 'Investi Future Vision',
         subtitle: 'The future of decentralized investment',
         roadmap: [
-          { date: 'Q2 2025', title: 'Share tokenization', desc: 'Transform shares into blockchain tokens' },
-          { date: 'Q3 2025', title: 'Investor DAO', desc: 'Decentralized governance for investment decisions' },
-          { date: 'Q4 2025', title: 'Video AI Coach', desc: 'Real-time behavioral analysis of pitches' },
-          { date: 'Q1 2026', title: 'Web3 Signature', desc: 'Smart contracts for investment agreements' }
+          { date: 'Q1 2026', title: 'Web3 Signature', desc: 'Smart contracts for investment agreements' },
+          { date: 'Q2 2026', title: 'International Launch', desc: 'Expansion to new European markets' },
+          { date: 'Q3 2026', title: 'New AI Products', desc: 'Launch of advanced AI solutions for investment' }
         ]
       },
       stats: {
@@ -282,17 +355,69 @@ const Index = () => {
         subtitle: 'Growth that speaks for itself',
         items: [
           { value: '+1300', label: 'Published projects', suffix: '' },
-          { value: '+€72M', label: 'Amount raised', suffix: '' },
+          { value: '+180M', label: 'Amount raised (TND)', suffix: '' },
           { value: '350+', label: 'Active investors', suffix: '' },
           { value: '17', label: 'Countries represented', suffix: '' }
+        ]
+      },
+      pricing: {
+        title: 'Transparent pricing',
+        subtitle: 'Choose the plan that fits your needs',
+        plans: [
+          {
+            name: 'Starter',
+            price: '0',
+            period: 'TND/month',
+            description: 'Perfect to get started',
+            features: [
+              'Basic entrepreneur profile',
+              'Up to 3 projects',
+              'Limited AI matching',
+              'Community support'
+            ],
+            cta: 'Start for free',
+            popular: false
+          },
+          {
+            name: 'Professional',
+            price: '89',
+            period: 'TND/month',
+            description: 'For serious entrepreneurs',
+            features: [
+              'Complete entrepreneur profile',
+              'Unlimited projects',
+              'Advanced AI matching',
+              'Personal AI coach',
+              'Detailed analytics',
+              'Priority support'
+            ],
+            cta: 'Try 14 days free',
+            popular: true
+          },
+          {
+            name: 'Enterprise',
+            price: '249',
+            period: 'TND/month',
+            description: 'For large companies',
+            features: [
+              'Everything in Professional',
+              'Team collaboration',
+              'Custom API',
+              'Dedicated support',
+              'Custom training',
+              'Advanced integrations'
+            ],
+            cta: 'Contact us',
+            popular: false
+          }
         ]
       },
       testimonials: {
         title: 'They trust us',
         items: [
-          { name: 'Sarah Chen', role: 'CEO, TechFlow', content: 'Thanks to Investi, I raised €2M in 3 months. The AI matching is amazing!', rating: 5 },
-          { name: 'Marc Dubois', role: 'Partner, Innovation Capital', content: 'Finally a platform that filters quality projects. Huge time saver.', rating: 5 },
-          { name: 'Lisa Rodriguez', role: 'Founder, GreenTech', content: 'The interface is intuitive and the AI coach helped me perfect my pitch.', rating: 5 }
+          { name: 'Amira Ben Salah', role: 'CEO, TechFlow Tunisia', content: 'Thanks to Investi, I raised 500,000 TND in 3 months. The AI matching is amazing!', rating: 5 },
+          { name: 'Mehdi Gharbi', role: 'Partner, Innovation Capital Tunis', content: 'Finally a platform that filters quality projects. Huge time saver.', rating: 5 },
+          { name: 'Sarra Karoui', role: 'Founder, GreenTech Tunisia', content: 'The interface is intuitive and the AI coach helped me perfect my pitch.', rating: 5 }
         ]
       },
       cta: {
@@ -311,6 +436,14 @@ const Index = () => {
     document.documentElement.classList.toggle('dark');
   };
 
+  const handleNavClick = (id: string) => {
+    setActiveNav(id);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero">
       {/* Navigation */}
@@ -325,10 +458,14 @@ const Index = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="#features" className="text-foreground hover:text-primary transition-smooth">{t.nav.features}</a>
-                <a href="#demo" className="text-foreground hover:text-primary transition-smooth">{t.nav.demo}</a>
-                <a href="#pricing" className="text-foreground hover:text-primary transition-smooth">{t.nav.pricing}</a>
-                <a href="#contact" className="text-foreground hover:text-primary transition-smooth">{t.nav.contact}</a>
+                <a href="#features" onClick={e => {e.preventDefault(); handleNavClick('features')}}
+                  className={`text-foreground hover:text-primary transition-smooth relative px-2 py-1 ${activeNav==='features' ? 'font-bold text-primary underline underline-offset-4' : ''}`}>{t.nav.features}</a>
+                <a href="#demo" onClick={e => {e.preventDefault(); handleNavClick('demo')}}
+                  className={`text-foreground hover:text-primary transition-smooth relative px-2 py-1 ${activeNav==='demo' ? 'font-bold text-primary underline underline-offset-4' : ''}`}>{t.nav.demo}</a>
+                <a href="#pricing" onClick={e => {e.preventDefault(); handleNavClick('pricing')}}
+                  className={`text-foreground hover:text-primary transition-smooth relative px-2 py-1 ${activeNav==='pricing' ? 'font-bold text-primary underline underline-offset-4' : ''}`}>{t.nav.pricing}</a>
+                <a href="#contact" onClick={e => {e.preventDefault(); handleNavClick('contact')}}
+                  className={`text-foreground hover:text-primary transition-smooth relative px-2 py-1 ${activeNav==='contact' ? 'font-bold text-primary underline underline-offset-4' : ''}`}>{t.nav.contact}</a>
               </div>
             </div>
 
@@ -360,10 +497,34 @@ const Index = () => {
         {isMenuOpen && (
           <div className="md:hidden glass-card border-t border-glass-border">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a href="#features" className="block px-3 py-2 text-foreground hover:text-primary transition-smooth">{t.nav.features}</a>
-              <a href="#demo" className="block px-3 py-2 text-foreground hover:text-primary transition-smooth">{t.nav.demo}</a>
-              <a href="#pricing" className="block px-3 py-2 text-foreground hover:text-primary transition-smooth">{t.nav.pricing}</a>
-              <a href="#contact" className="block px-3 py-2 text-foreground hover:text-primary transition-smooth">{t.nav.contact}</a>
+              <a 
+                href="#features" 
+                className={`block px-3 py-2 text-foreground hover:text-primary transition-smooth ${activeNav==='features' ? 'font-bold text-primary underline underline-offset-4' : ''}`}
+                onClick={e => {e.preventDefault(); handleNavClick('features')}}
+              >
+                {t.nav.features}
+              </a>
+              <a 
+                href="#demo" 
+                className={`block px-3 py-2 text-foreground hover:text-primary transition-smooth ${activeNav==='demo' ? 'font-bold text-primary underline underline-offset-4' : ''}`}
+                onClick={e => {e.preventDefault(); handleNavClick('demo')}}
+              >
+                {t.nav.demo}
+              </a>
+              <a 
+                href="#pricing" 
+                className={`block px-3 py-2 text-foreground hover:text-primary transition-smooth ${activeNav==='pricing' ? 'font-bold text-primary underline underline-offset-4' : ''}`}
+                onClick={e => {e.preventDefault(); handleNavClick('pricing')}}
+              >
+                {t.nav.pricing}
+              </a>
+              <a 
+                href="#contact" 
+                className={`block px-3 py-2 text-foreground hover:text-primary transition-smooth ${activeNav==='contact' ? 'font-bold text-primary underline underline-offset-4' : ''}`}
+                onClick={e => {e.preventDefault(); handleNavClick('contact')}}
+              >
+                {t.nav.contact}
+              </a>
             </div>
           </div>
         )}
@@ -535,7 +696,7 @@ const Index = () => {
                 <CardContent className="p-8">
                   <div className="text-4xl font-bold text-gradient mb-2">
                     {index === 0 && `+${animatedStats.projects}`}
-                    {index === 1 && `+${animatedStats.funding}M€`}
+                    {index === 1 && `+${animatedStats.funding}M`}
                     {index === 2 && `${animatedStats.investors}+`}
                     {index === 3 && animatedStats.countries}
                   </div>
@@ -547,21 +708,95 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">{t.pricing.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.pricing.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {t.pricing.plans.map((plan, index) => (
+              <Card key={index} className={`glass-card hover-lift animate-scale-in relative ${
+                plan.popular ? 'border-2 border-primary shadow-glow' : ''
+              }`}>
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <Badge className="bg-gradient-primary text-white px-4 py-1">
+                      Le plus populaire
+                    </Badge>
+                  </div>
+                )}
+                <CardContent className="p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <p className="text-muted-foreground mb-4">{plan.description}</p>
+                    <div className="flex items-baseline justify-center">
+                      <span className="text-4xl font-bold text-gradient">{plan.price}</span>
+                      <span className="text-muted-foreground ml-2">{plan.period}</span>
+                    </div>
+                  </div>
+                  
+                  <ul className="space-y-4 mb-8">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    className={`w-full ${
+                      plan.popular 
+                        ? 'bg-gradient-primary hover:shadow-glow' 
+                        : 'glass-button hover:border-primary/50'
+                    } transition-all duration-300`}
+                    onClick={() => navigate('/register')}
+                  >
+                    {plan.cta}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form */}
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-glass">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Contactez-nous</h2>
+            <p className="text-xl text-muted-foreground">Nous serions ravis de répondre à vos questions ou de discuter de votre projet.</p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+
       {/* Demo Video */}
       <section id="demo" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <div className="animate-fade-in-up">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gradient">Découvrez Investi en action</h2>
-            <div className="relative group cursor-pointer">
+            <div 
+              className="relative group cursor-pointer"
+              onClick={() => setIsVideoModalOpen(true)}
+            >
               <img 
                 src={dashboardImage}
                 alt="Demo Investi"
-                className="w-full rounded-3xl shadow-elegant group-hover:shadow-glow transition-all duration-300"
+                className="w-full rounded-3xl shadow-elegant group-hover:shadow-glow transition-all duration-300 group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-black/30 rounded-3xl flex items-center justify-center group-hover:bg-black/20 transition-all duration-300">
-                <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center animate-pulse-glow">
+                <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center animate-pulse-glow group-hover:scale-110 transition-transform duration-300">
                   <Play className="h-8 w-8 text-primary ml-1" />
                 </div>
+              </div>
+              {/* Play overlay text */}
+              <div className="absolute bottom-8 left-8 right-8 text-white">
+                <p className="text-lg font-semibold mb-2">Regarder la démo complète</p>
+                <p className="text-sm opacity-90">Découvrez comment Investi transforme votre levée de fonds</p>
               </div>
             </div>
           </div>
@@ -690,6 +925,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Video Modal */}
+      <VideoModal 
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoUrl="https://www.youtube.com/watch?v=yG4-gNYDwcc&pp=ygULZ2hhemkgcmFiZWg%3D"
+      />
     </div>
   );
 };
