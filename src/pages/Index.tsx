@@ -21,7 +21,13 @@ import {
   Menu,
   X,
   Moon,
-  Sun
+  Sun,
+  FolderOpen,
+  Lock,
+  Calendar,
+  Target,
+  FileText,
+  Award
 } from 'lucide-react';
 import heroImage from '@/assets/hero-investi.jpg';
 import aiMatchingImage from '@/assets/ai-matching.jpg';
@@ -108,14 +114,56 @@ const Index = () => {
           { icon: Shield, title: 'Coach IA Personnel', desc: 'Assistant intelligent qui analyse et améliore votre pitch avec des conseils personnalisés.' }
         ]
       },
+      powerfulFeatures: {
+        title: 'Fonctionnalités puissantes & expérience unique',
+        subtitle: 'Investi ne se contente pas de connecter. Il propulse les idées vers leur réalité.',
+        features: [
+          { 
+            icon: Brain, 
+            title: 'Matching Intelligent avec IA', 
+            desc: 'Associe automatiquement votre projet aux investisseurs les plus pertinents selon le secteur, la maturité, le montant visé et les précédents investissements.',
+            badge: '🔥 Intérêt élevé'
+          },
+          { 
+            icon: FolderOpen, 
+            title: 'Dossier d\'investissement intelligent', 
+            desc: 'Assistant guidé pour constituer un dossier structuré : pitch écrit, business plan, vidéo de présentation, objectifs de levée et statuts.',
+            badge: '✅ Compatible'
+          },
+          { 
+            icon: Lock, 
+            title: 'Coffre-fort numérique sécurisé', 
+            desc: 'Stockage chiffré AES-256 de tous vos documents avec accès granularisé et historique des consultations.',
+            badge: '🔒 Sécurisé'
+          },
+          { 
+            icon: Calendar, 
+            title: 'Réunions intégrées en visio', 
+            desc: 'Organisez des rendez-vous avec calendrier connecté, visio intégrée et gestion de documents en direct.',
+            badge: '📅 Planifié'
+          },
+          { 
+            icon: MessageCircle, 
+            title: 'Messagerie directe & fil de discussions', 
+            desc: 'Discussion instantanée avec les investisseurs intéressés, historique centralisé et notifications intelligentes.',
+            badge: '💬 Actif'
+          },
+          { 
+            icon: BarChart3, 
+            title: 'Suivi de vos performances & KPIs', 
+            desc: 'Tableau de bord animé avec statut des demandes, taux de réponse, montant levé vs cible et feedback investisseurs.',
+            badge: '📊 Analytique'
+          }
+        ]
+      },
       future: {
         title: 'Vision Future d\'Investi',
         subtitle: 'L\'avenir de l\'investissement décentralisé',
         roadmap: [
-          { date: 'Q2 2024', title: 'Tokenisation des parts', desc: 'Transformation des actions en tokens blockchain' },
-          { date: 'Q3 2024', title: 'DAO d\'investisseurs', desc: 'Gouvernance décentralisée pour les décisions d\'investissement' },
-          { date: 'Q4 2024', title: 'IA Coach Vidéo', desc: 'Analyse comportementale des pitchs en temps réel' },
-          { date: 'Q1 2025', title: 'Signature Web3', desc: 'Contrats intelligents pour les accords d\'investissement' }
+          { date: 'Q2 2025', title: 'Tokenisation des parts', desc: 'Transformation des actions en tokens blockchain' },
+          { date: 'Q3 2025', title: 'DAO d\'investisseurs', desc: 'Gouvernance décentralisée pour les décisions d\'investissement' },
+          { date: 'Q4 2025', title: 'IA Coach Vidéo', desc: 'Analyse comportementale des pitchs en temps réel' },
+          { date: 'Q1 2026', title: 'Signature Web3', desc: 'Contrats intelligents pour les accords d\'investissement' }
         ]
       },
       stats: {
@@ -177,14 +225,56 @@ const Index = () => {
           { icon: Shield, title: 'Personal AI Coach', desc: 'Intelligent assistant that analyzes and improves your pitch with personalized advice.' }
         ]
       },
+      powerfulFeatures: {
+        title: 'Powerful features & unique experience',
+        subtitle: 'Investi doesn\'t just connect. It propels ideas towards their reality.',
+        features: [
+          { 
+            icon: Brain, 
+            title: 'Smart AI Matching', 
+            desc: 'Automatically associates your project with the most relevant investors according to sector, maturity, target amount and previous investments.',
+            badge: '🔥 High interest'
+          },
+          { 
+            icon: FolderOpen, 
+            title: 'Smart investment file', 
+            desc: 'Guided assistant to build a structured file: written pitch, business plan, presentation video, fundraising objectives and statutes.',
+            badge: '✅ Compatible'
+          },
+          { 
+            icon: Lock, 
+            title: 'Secure digital vault', 
+            desc: 'AES-256 encrypted storage of all your documents with granular access and consultation history.',
+            badge: '🔒 Secure'
+          },
+          { 
+            icon: Calendar, 
+            title: 'Integrated video meetings', 
+            desc: 'Organize appointments with connected calendar, integrated video and real-time document management.',
+            badge: '📅 Scheduled'
+          },
+          { 
+            icon: MessageCircle, 
+            title: 'Direct messaging & discussion thread', 
+            desc: 'Instant discussion with interested investors, centralized history and smart notifications.',
+            badge: '💬 Active'
+          },
+          { 
+            icon: BarChart3, 
+            title: 'Performance & KPI tracking', 
+            desc: 'Animated dashboard with request status, response rate, amount raised vs target and investor feedback.',
+            badge: '📊 Analytics'
+          }
+        ]
+      },
       future: {
         title: 'Investi Future Vision',
         subtitle: 'The future of decentralized investment',
         roadmap: [
-          { date: 'Q2 2024', title: 'Share tokenization', desc: 'Transform shares into blockchain tokens' },
-          { date: 'Q3 2024', title: 'Investor DAO', desc: 'Decentralized governance for investment decisions' },
-          { date: 'Q4 2024', title: 'Video AI Coach', desc: 'Real-time behavioral analysis of pitches' },
-          { date: 'Q1 2025', title: 'Web3 Signature', desc: 'Smart contracts for investment agreements' }
+          { date: 'Q2 2025', title: 'Share tokenization', desc: 'Transform shares into blockchain tokens' },
+          { date: 'Q3 2025', title: 'Investor DAO', desc: 'Decentralized governance for investment decisions' },
+          { date: 'Q4 2025', title: 'Video AI Coach', desc: 'Real-time behavioral analysis of pitches' },
+          { date: 'Q1 2026', title: 'Web3 Signature', desc: 'Smart contracts for investment agreements' }
         ]
       },
       stats: {
@@ -362,6 +452,34 @@ const Index = () => {
                 <CardContent className="p-6">
                   <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-glow transition-all duration-300">
                     <feature.icon className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Powerful Features Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">{t.powerfulFeatures.title}</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t.powerfulFeatures.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {t.powerfulFeatures.features.map((feature, index) => (
+              <Card key={index} className="glass-card hover-lift animate-scale-in group">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:shadow-glow transition-all duration-300">
+                      <feature.icon className="h-7 w-7 text-white" />
+                    </div>
+                    <Badge className="glass-button text-xs border-primary/50">
+                      {feature.badge}
+                    </Badge>
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
