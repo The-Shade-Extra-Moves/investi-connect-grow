@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
   Zap, 
@@ -27,6 +28,7 @@ import aiMatchingImage from '@/assets/ai-matching.jpg';
 import dashboardImage from '@/assets/dashboard-preview.jpg';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [currentLang, setCurrentLang] = useState<'fr' | 'en'>('fr');
@@ -298,6 +300,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   className="bg-gradient-primary hover:shadow-glow transition-all duration-300 group"
+                  onClick={() => navigate('/register')}
                 >
                   {t.hero.ctaProject}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -306,6 +309,7 @@ const Index = () => {
                   size="lg" 
                   variant="outline"
                   className="glass-button group"
+                  onClick={() => document.getElementById('demo')?.scrollIntoView({behavior: 'smooth'})}
                 >
                   <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
                   {t.hero.ctaDemo}
@@ -482,6 +486,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="bg-gradient-primary hover:shadow-glow transition-all duration-300 text-lg px-8 py-4 group"
+              onClick={() => navigate('/register')}
             >
               <Users className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               {t.cta.entrepreneur}
@@ -491,6 +496,7 @@ const Index = () => {
               size="lg" 
               variant="outline"
               className="glass-button text-lg px-8 py-4 group"
+              onClick={() => navigate('/register')}
             >
               <TrendingUp className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               {t.cta.investor}
