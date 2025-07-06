@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -28,13 +31,329 @@ import {
   Target,
   FileText,
   Award,
-  CheckCircle
+  CheckCircle,
+  Mail,
+  User,
+  Phone,
+  Building
 } from 'lucide-react';
 import heroImage from '@/assets/hero-investi.jpg';
 import aiMatchingImage from '@/assets/ai-matching.jpg';
 import dashboardImage from '@/assets/dashboard-preview.jpg';
-import ContactForm from './ContactForm';
-import VideoModal from './VideoModal';
+
+// ContactForm Component
+const ContactForm = () => {
+  const [form, setForm] = useState({ 
+    name: '', 
+    email: '', 
+    phone: '', 
+    company: '', 
+    subject: '', 
+    message: '' 
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulation of form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setSubmitted(true);
+    setIsLoading(false);
+  };
+
+  if (submitted) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <Card className="glass-card animate-fade-in-up border-2 border-primary/20">
+          <CardContent className="p-12 text-center">
+            <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-glow">
+              <CheckCircle className="h-10 w-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4 text-gradient">Message envoyé avec succès !</h3>
+            <p className="text-lg text-muted-foreground mb-6">
+              Merci pour votre message. Notre équipe vous répondra dans les plus brefs délais.
+            </p>
+            <Badge className="glass-button border-primary/50">
+              Réponse sous 24h
+            </Badge>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Contact Info */}
+        <div className="space-y-8">
+          <div className="animate-fade-in-up">
+            <Badge className="mb-6 glass-button border-primary/50">
+              <MessageCircle className="w-3 h-3 mr-1" />
+              Support Expert
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">
+              Parlons de votre projet
+            </h2>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Notre équipe d'experts est là pour vous accompagner dans votre démarche d'investissement.
+            </p>
+          </div>
+
+          <div className="space-y-6 animate-fade-in-up">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+                <Mail className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold">Email</p>
+                <p className="text-muted-foreground">nassim.ceo@investi.tn</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+                <Phone className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold">Téléphone</p>
+                <p className="text-muted-foreground">+216 22 601 631</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+                <Building className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold">Adresse</p>
+                <p className="text-muted-foreground">Belyess, Tunis, Tunisie</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Form */}
+        <Card className="glass-card animate-fade-in-up border-2 border-glass-border hover:border-primary/50 transition-all duration-300">
+          <CardHeader>
+            <CardTitle className="text-2xl text-gradient">Envoyez-nous un message</CardTitle>
+          </CardHeader>
+          <CardContent className="p-8 pt-0">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="flex items-center">
+                    <User className="h-4 w-4 mr-2" />
+                    Nom complet
+                  </Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="glass-input"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="Votre nom complet"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="flex items-center">
+                    <Phone className="h-4 w-4 mr-2" />
+                    Téléphone
+                  </Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    className="glass-input"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="+216 XX XXX XXX"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email" className="flex items-center">
+                  <Mail className="h-4 w-4 mr-2" />
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="glass-input"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="votre.email@exemple.com"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="company" className="flex items-center">
+                  <Building className="h-4 w-4 mr-2" />
+                  Entreprise
+                </Label>
+                <Input
+                  id="company"
+                  name="company"
+                  type="text"
+                  className="glass-input"
+                  value={form.company}
+                  onChange={handleChange}
+                  placeholder="Nom de votre entreprise"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="subject">Sujet</Label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  required
+                  className="glass-input"
+                  value={form.subject}
+                  onChange={handleChange}
+                  placeholder="Objet de votre message"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message" className="flex items-center">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Message
+                </Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={5}
+                  className="glass-input resize-none"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="Décrivez votre projet ou votre demande..."
+                />
+              </div>
+
+              <Button 
+                type="submit" 
+                disabled={isLoading}
+                className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 group"
+              >
+                {isLoading ? (
+                  <div className="flex items-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Envoi en cours...
+                  </div>
+                ) : (
+                  <>
+                    Envoyer le message
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+// VideoModal Component
+interface VideoModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  videoUrl: string;
+}
+
+const VideoModal = ({ isOpen, onClose, videoUrl }: VideoModalProps) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  // Convert YouTube URL to embed URL
+  const getEmbedUrl = (url: string) => {
+    const videoId = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  };
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div 
+        className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-50 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0'
+        }`}
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+        isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+      }`}>
+        <div 
+          className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-300"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+          >
+            <X className="h-5 w-5 text-white" />
+          </button>
+          
+          {/* Video Iframe */}
+          <iframe
+            src={getEmbedUrl(videoUrl)}
+            className="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            title="Demo Video"
+          />
+        </div>
+      </div>
+    </>
+  );
+};
 
 const Index = () => {
   const navigate = useNavigate();
