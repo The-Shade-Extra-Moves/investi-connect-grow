@@ -33,8 +33,8 @@ import {
 import heroImage from '@/assets/hero-investi.jpg';
 import aiMatchingImage from '@/assets/ai-matching.jpg';
 import dashboardImage from '@/assets/dashboard-preview.jpg';
-import ContactForm from '@/components/ContactForm';
-import VideoModal from '@/components/VideoModal';
+import ContactForm from '../components/ContactForm';
+import VideoModal from '../components/VideoModal';
 
 const Index = () => {
   const navigate = useNavigate();
